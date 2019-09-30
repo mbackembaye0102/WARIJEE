@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public enum Profil {
+public class Profil {
     ;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,6 @@
 package com.transfert.wari.repository;
 
-import com.devweb.rh.model.User;
+import com.transfert.wari.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

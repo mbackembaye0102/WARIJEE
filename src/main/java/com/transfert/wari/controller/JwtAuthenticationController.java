@@ -3,6 +3,7 @@ package com.transfert.wari.controller;
 import com.transfert.wari.config.JwtTokenUtil;
 import com.transfert.wari.model.JwtRequest;
 import com.transfert.wari.model.JwtResponse;
+import com.transfert.wari.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

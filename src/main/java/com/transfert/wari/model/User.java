@@ -74,8 +74,67 @@ public class User{
     @NotBlank
     private DateTimeFormat updatedAt;
 
-    public void setNomComplet(String nomComplet) {
+
+
+
+    @NotBlank
+    @Size(min=7, max = 15)
+    private String imageName;
+
+
+
+
+    public User() {}
+
+    public User(String nomComplet, String username, String password) {
         this.nomComplet = nomComplet;
+        this.username = username;
+        this.password = password;
+    }
+
+
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getNomComplet() {
+        return nomComplet;
+    }
+
+    public void SetNomComplet(String nomComplet) {
+        this.nomComplet = nomComplet;
+    }
+
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public String getStatut() {
@@ -134,60 +193,4 @@ public class User{
         this.imageName = imageName;
     }
 
-    @NotBlank
-    @Size(min=7, max = 15)
-    private String imageName;
-
-
-
-
-    public User() {}
-
-    public User(String nomComplet, String username, String password) {
-        this.nomComplet = nomComplet;
-        this.username = username;
-        this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getNomComplet() {
-        return nomComplet;
-    }
-
-    public void SetNomComplet(String nomComplet) {
-        this.nomComplet = nomComplet;
-    }
-
-
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 }

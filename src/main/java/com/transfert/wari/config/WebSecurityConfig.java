@@ -1,6 +1,6 @@
 package com.transfert.wari.config;
 
-import com.devweb.rh.services.UserDetailsServiceImpl;
+import com.transfert.wari.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
