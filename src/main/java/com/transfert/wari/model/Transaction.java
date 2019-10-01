@@ -1,12 +1,14 @@
 package com.transfert.wari.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
+@Entity
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -95,22 +97,32 @@ public class Transaction {
 
     @NotBlank
     @Autowired(required = false)
-    private DateTimeFormat dateEnvoie;
+    @DateTimeFormat(pattern ="yyyy-MM-dd-mm-ss")
+    private Date dateEnvoie;
 
     @NotBlank
     @Autowired(required = false)
-    private DateTimeFormat dateRetrait;
+    @DateTimeFormat(pattern ="yyyy-MM-dd-mm-ss")
+    private Date dateRetrait;
 
     @JoinColumn(name = "guichetier_envoie_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     @Autowired(required = false)
+    @JsonIgnoreProperties("transaction")
     private User guichetierEnvoie ;
 
 
     @JoinColumn(name = "guichetier_Retrait_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     @Autowired(required = false)
+    @JsonIgnoreProperties("transaction")
     private User guichetierRetrait ;
+
+
+    @JoinColumn(name = "compte_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    @JsonIgnoreProperties("transaction")
+    private Compte compte ;
 
     @NotBlank
     @Size(min=3, max = 50)
@@ -268,19 +280,19 @@ public class Transaction {
         this.commissionEtat = commissionEtat;
     }
 
-    public DateTimeFormat getDateEnvoie() {
+    public Date getDateEnvoie() {
         return dateEnvoie;
     }
 
-    public void setDateEnvoie(DateTimeFormat dateEnvoie) {
+    public void setDateEnvoie(Date dateEnvoie) {
         this.dateEnvoie = dateEnvoie;
     }
 
-    public DateTimeFormat getDateRetrait() {
+    public Date getDateRetrait() {
         return dateRetrait;
     }
 
-    public void setDateRetrait(DateTimeFormat dateRetrait) {
+    public void setDateRetrait(Date dateRetrait) {
         this.dateRetrait = dateRetrait;
     }
 
@@ -306,5 +318,13 @@ public class Transaction {
 
     public void setEtat(String etat) {
         this.etat = etat;
+    }
+
+    public Compte getCompte() {
+        return compte;
+    }
+
+    public void setCompte(Compte compte) {
+        this.compte = compte;
     }
 }

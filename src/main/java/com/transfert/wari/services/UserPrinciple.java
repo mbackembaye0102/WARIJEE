@@ -16,7 +16,7 @@ public class UserPrinciple implements UserDetails {
 
     private Long id;
 
-    private String nomComplet;
+    private String name;
 
     private String username;
 
@@ -26,11 +26,11 @@ public class UserPrinciple implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrinciple(Long id, String nomComplet,
-                         String username, String password,
+    public UserPrinciple(Long id, String name,
+                         String username,String password,
                          Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.nomComplet = nomComplet;
+        this.name = name;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
@@ -43,7 +43,7 @@ public class UserPrinciple implements UserDetails {
 
         return new UserPrinciple(
                 user.getId(),
-                user.getNomComplet(),
+                user.getName(),
                 user.getUsername(),
                 user.getPassword(),
                 authorities
@@ -54,8 +54,8 @@ public class UserPrinciple implements UserDetails {
         return id;
     }
 
-    public String getNomcomplet() {
-        return nomComplet;
+    public String getName() {
+        return name;
     }
 
 
