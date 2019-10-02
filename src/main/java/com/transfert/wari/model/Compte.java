@@ -1,39 +1,38 @@
 package com.transfert.wari.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import javax.servlet.http.Part;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import java.util.List;
-
 @Entity
+@Data
+@EqualsAndHashCode(exclude = "partenaire")
 public class Compte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
-    @Size(min=3, max = 50)
+    @Column(length = 30)
     private String numeroCompte;
 
-    @NotBlank
-    @Size(min=3, max = 50)
-    private int solde;
+    private Integer solde;
 
     @JoinColumn(name = "partenaire_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @Autowired(required = false)
-    private Partenaire partenaire ;
+    @JsonIgnoreProperties("comptes")
+    private Partenaire partenaire;
 
-
-    @OneToMany(mappedBy ="compte")
+    @OneToMany(mappedBy = "compte")
     @JsonIgnoreProperties("compte")
-    private List <Depot> depots;
-
+    private List<User> users;
 
     public int getId() {
         return id;
@@ -51,11 +50,11 @@ public class Compte {
         this.numeroCompte = numeroCompte;
     }
 
-    public int getSolde() {
+    public Integer getSolde() {
         return solde;
     }
 
-    public void setSolde(int solde) {
+    public void setSolde(Integer solde) {
         this.solde = solde;
     }
 
@@ -67,11 +66,11 @@ public class Compte {
         this.partenaire = partenaire;
     }
 
-    public List<Depot> getDepots() {
-        return depots;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setDepots(List<Depot> depots) {
-        this.depots = depots;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

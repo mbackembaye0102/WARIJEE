@@ -1,12 +1,18 @@
 package com.transfert.wari.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
+
+
 @Entity
+@Data
+@EqualsAndHashCode(exclude = "users,comptes")
 public class Partenaire {
 
     @Id
@@ -28,6 +34,17 @@ public class Partenaire {
     @NotBlank
     @Size(min=3, max = 50)
     private String statut;
+
+    @OneToMany(mappedBy ="partenaire")
+    @JsonIgnoreProperties("partenaire")
+    private List<User> users;
+
+    @OneToMany(mappedBy ="partenaire")
+    @JsonIgnoreProperties("partenaire")
+    private List<Compte> comptes;
+
+    public Partenaire() {
+    }
 
     public int getId() {
         return id;
@@ -68,7 +85,20 @@ public class Partenaire {
         this.statut = statut;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
 
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
+    public List<Compte> getComptes() {
+        return comptes;
+    }
+
+    public void setComptes(List<Compte> comptes) {
+        this.comptes = comptes;
+    }
 }
 

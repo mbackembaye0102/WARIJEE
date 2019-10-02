@@ -11,6 +11,10 @@ public class RegistrationUser {
     private Partenaire partenaire;
     private Compte compte;
 
+
+
+
+
     public String getName() {
         return name;
     }

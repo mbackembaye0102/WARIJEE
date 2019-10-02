@@ -1,6 +1,8 @@
 package com.transfert.wari.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -16,6 +18,8 @@ import java.util.Set;
                 "username"
         })
 })
+@Data
+@EqualsAndHashCode(exclude = "partenaire, compte")
 public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,12 +44,12 @@ public class User{
 
     @JoinColumn(name = "partenaire_id" ,referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnoreProperties("user")
+    @JsonIgnoreProperties("users")
     private Partenaire partenaire;
 
     @JoinColumn(name = "compte_id" ,referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnoreProperties("user")
+    @JsonIgnoreProperties("users")
     private Compte compte;
 
 

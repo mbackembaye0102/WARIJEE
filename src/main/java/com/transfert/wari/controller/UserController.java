@@ -24,12 +24,13 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_CAISSIER')")
     @GetMapping(value = "/liste")
     public List<User> liste (){
 
         return userRepository.findAll();
     }
+
 
     @Autowired
     PasswordEncoder encoder	;
@@ -42,6 +43,7 @@ public class UserController {
         u.setPassword(encoder.encode(registrationUser.getPassword()));
         u.setTelephone(registrationUser.getTelephone());
         u.setStatut("debloquer");
+        //ATTRIBUTION DU ROLE
         Set<Role> roles =new HashSet<>();
         Role role =new Role();
         role.setId(registrationUser.getProfil());
@@ -49,12 +51,14 @@ public class UserController {
         u.setRoles(roles);
 
 
-//        User user=userDetailsService.getUserConnecte();
-//        user.getPartenaire();
-//        u.setPartenaire(user.getPartenaire());
+        User user=userDetailsService.getUserConnecte();
+        user.getPartenaire();
+        u.setPartenaire(user.getPartenaire());
 
         return userRepository.save(u);
     }
+
+
 
 
 }

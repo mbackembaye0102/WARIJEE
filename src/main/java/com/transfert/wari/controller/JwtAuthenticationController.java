@@ -4,6 +4,8 @@ package com.transfert.wari.controller;
 import com.transfert.wari.config.JwtTokenUtil;
 import com.transfert.wari.model.JwtRequest;
 import com.transfert.wari.model.JwtResponse;
+import com.transfert.wari.model.User;
+import com.transfert.wari.repository.UserRepository;
 import com.transfert.wari.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -38,9 +40,19 @@ public class JwtAuthenticationController {
         final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResponse(token));
     }
-
+@Autowired
+    UserRepository userRepository;
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE })
     public @ResponseBody String createLoginToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+        User user= userRepository.findByUsername(authenticationRequest.getUsername()).orElseThrow();
+        if(user.getStatut().equals("bloquer")){
+            return  "vous etes bloqués";
+        }
+
+        if(user.getPartenaire().getStatut().equals("bloquer")){
+            return  "votre partenaire est bloqué";
+        }
+
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
