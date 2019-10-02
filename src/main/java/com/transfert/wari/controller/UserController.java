@@ -33,7 +33,7 @@ public class UserController {
 
     @Autowired
     PasswordEncoder encoder	;
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     @PostMapping(value = "/add",consumes =(MediaType.APPLICATION_JSON_VALUE))
     public User add (@RequestBody(required = false) RegistrationUser  registrationUser){
         User u =new User();
@@ -49,9 +49,9 @@ public class UserController {
         u.setRoles(roles);
 
 
-        User user=userDetailsService.getUserConnecte();
-        user.getPartenaire();
-        u.setPartenaire(user.getPartenaire());
+//        User user=userDetailsService.getUserConnecte();
+//        user.getPartenaire();
+//        u.setPartenaire(user.getPartenaire());
 
         return userRepository.save(u);
     }

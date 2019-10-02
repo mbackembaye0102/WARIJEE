@@ -1,22 +1,21 @@
 package com.transfert.wari.model;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.List;
-
 @Entity
 public class Partenaire {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @NotBlank
     @Size(min=3, max = 50)
-    private String raisonSociale;
+    private String entreprise;
 
     @NotBlank
     @Size(min=3, max = 50)
@@ -30,48 +29,20 @@ public class Partenaire {
     @Size(min=3, max = 50)
     private String statut;
 
-    @OneToMany(mappedBy ="partenaire")
-    @JsonIgnoreProperties("partenaire")
-    private List <Compte> comptes;
-
-    @OneToMany(mappedBy ="partenaire")
-    @JsonIgnoreProperties("partenaire")
-    private List <User> users;
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    public List<Compte> getComptes() {
-        return comptes;
-    }
-
-    public void setComptes(List<Compte> comptes) {
-        this.comptes = comptes;
-    }
-
-    public String getRaisonSociale() {
-        return raisonSociale;
-    }
-
-    public void setRaisonSociale(String raisonSociale) {
-        this.raisonSociale = raisonSociale;
-    }
-
-
-
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
+    public String getEntreprise() {
+        return entreprise;
+    }
 
+    public void setEntreprise(String entreprise) {
+        this.entreprise = entreprise;
+    }
 
     public String getNinea() {
         return ninea;
@@ -99,9 +70,5 @@ public class Partenaire {
 
 
 
-
-
-
-
-
 }
+

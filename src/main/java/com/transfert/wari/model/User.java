@@ -1,7 +1,8 @@
 package com.transfert.wari.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.NaturalId;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -36,6 +37,7 @@ public class User{
     @Size(min=3, max = 20)
     private String statut;
 
+
     @JoinColumn(name = "partenaire_id" ,referencedColumnName = "id")
     @ManyToOne(optional = false)
     @JsonIgnoreProperties("user")
@@ -57,10 +59,10 @@ public class User{
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-
-    @OneToMany(mappedBy ="user")
-    @JsonIgnoreProperties("transaction")
-    private List <Depot> depots;
+//
+//    @OneToMany(mappedBy ="user")
+//    @JsonIgnoreProperties("transaction")
+//    private List <Depot> depots;
 
 
 
@@ -146,13 +148,13 @@ public class User{
         this.compte = compte;
     }
 
-    public List<Depot> getDepots() {
-        return depots;
-    }
-
-    public void setDepots(List<Depot> depots) {
-        this.depots = depots;
-    }
+//    public List<Depot> getDepots() {
+//        return depots;
+//    }
+//
+//    public void setDepots(List<Depot> depots) {
+//        this.depots = depots;
+//    }
 
 
 }

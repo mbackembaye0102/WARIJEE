@@ -1,8 +1,8 @@
 package com.transfert.wari.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -108,25 +108,22 @@ public class Transaction {
     @JoinColumn(name = "guichetier_envoie_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     @Autowired(required = false)
-    @JsonIgnoreProperties("transaction")
     private User guichetierEnvoie ;
 
 
     @JoinColumn(name = "guichetier_Retrait_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     @Autowired(required = false)
-    @JsonIgnoreProperties("transaction")
     private User guichetierRetrait ;
-
-
-    @JoinColumn(name = "compte_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    @JsonIgnoreProperties("transaction")
-    private Compte compte ;
 
     @NotBlank
     @Size(min=3, max = 50)
     private String etat;
+
+    @JoinColumn(name = "compte_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    @Autowired(required = false)
+    private Compte compte ;
 
     public int getId() {
         return id;
