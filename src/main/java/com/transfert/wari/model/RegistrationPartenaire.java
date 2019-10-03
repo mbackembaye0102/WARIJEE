@@ -1,11 +1,12 @@
 package com.transfert.wari.model;
 
 public class RegistrationPartenaire {
-
+    //POUR PARTENAIRE
     private String entreprise;
     private String ninea;
     private String adresse;
     private String statut;
+    //POUR USER
     private String name;
     private String username;
     private String password;
@@ -14,6 +15,7 @@ public class RegistrationPartenaire {
     private Long profil;
     private Partenaire partenaireu;
     private Compte compte;
+    //POUR COMPTE
     private String numeroCompte;
     private Integer solde;
     private Partenaire partenairec;

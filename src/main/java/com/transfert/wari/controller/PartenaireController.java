@@ -49,23 +49,18 @@ public class PartenaireController {
         return partenaireRepository.save(p);
     }
 
-    @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
+    //@PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     @PostMapping(value = "/addCompte",consumes =(MediaType.APPLICATION_JSON_VALUE))
     public Compte add (@RequestBody(required = false) Compte c){
-
-//        String nb;
-//        nb = "MA"+(10000+(int) Math.random()*(99999-10000));
-//        c.setNumeroCompte(nb);
-
-        SimpleDateFormat formater = null;
-
-        formater = new SimpleDateFormat("ssyyyyMMddHHmm");
-        Date now=new Date();
-        String numcompt = formater.format(now);
-
-        c.setNumeroCompte(numcompt);
+        String nb;
+        nb = "COMPTE"+(10000000+(int) Math.random()*(99999999-10000000));
+        c.setNumeroCompte(nb);
         c.setSolde(75000);
-
+//        SimpleDateFormat formater = null;
+//        formater = new SimpleDateFormat("ssyyyyMMddHHmm");
+//        Date now=new Date();
+//        String numcompt = formater.format(now);
+//        c.setNumeroCompte(numcompt);
 
         return compteRepository.save(c);
     }
@@ -87,16 +82,19 @@ public class PartenaireController {
 
         //AJOUT COMPTE
         Compte c = new Compte();
+        //1er Methode
        // String nb;
        // nb = "MA"+(10000+(int) Math.random()*(99999-10000));
-        SimpleDateFormat formater = null;
+        //c.setNumeroCompte(nb);
 
+
+        //2e Methode
+        SimpleDateFormat formater = null;
         formater = new SimpleDateFormat("ssyyyyMMddHHmm");
         Date now=new Date();
         String numcompt = formater.format(now);
 
         c.setNumeroCompte(numcompt);
-        //c.setNumeroCompte(nb);
         c.setPartenaire(p);
         c.setSolde(75000);
         compteRepository.save(c);

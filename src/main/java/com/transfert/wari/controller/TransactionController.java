@@ -66,4 +66,15 @@ public class TransactionController {
 
     }
 
+    @PostMapping(value = "/findCompte",consumes =(MediaType.APPLICATION_JSON_VALUE))
+    public ResponseEntity<String> findCompte (@RequestBody(required = false) AccountUser  accountUser){
+        User user= userRepository.findByUsername(accountUser.getUsername()).orElseThrow();
+        user.setUsername(accountUser.getUsername());
+        user.setCompte(accountUser.getCompte());
+        userRepository.save(user);
+
+        return new ResponseEntity<>("Compte Utilsateur Ajouté Avec Succés", HttpStatus.OK);
+
+    }
+
 }
