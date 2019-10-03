@@ -34,6 +34,17 @@ public class TransactionController {
     @Autowired
     private CompteRepository compteRepository;
 
+    @GetMapping(value = "/listeCompte")
+    public  List<Compte> listeCompte() {
+        return compteRepository.findAll();
+    }
+
+    @GetMapping(value = "/listeDepot")
+    public  List<Depot> listeDepot() {
+        return depotRepository.findAll();
+    }
+
+
     //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping(value = "/addDepot",consumes =(MediaType.APPLICATION_JSON_VALUE))
     public ResponseEntity<String> add (@RequestBody(required = false) RegistrationUser  registrationUser){
@@ -63,18 +74,26 @@ public class TransactionController {
         userRepository.save(user);
 
         return new ResponseEntity<>("Compte Utilsateur Ajouté Avec Succés", HttpStatus.OK);
-
     }
 
     @PostMapping(value = "/findCompte",consumes =(MediaType.APPLICATION_JSON_VALUE))
-    public ResponseEntity<String> findCompte (@RequestBody(required = false) AccountUser  accountUser){
-        User user= userRepository.findByUsername(accountUser.getUsername()).orElseThrow();
-        user.setUsername(accountUser.getUsername());
-        user.setCompte(accountUser.getCompte());
-        userRepository.save(user);
+    public Compte findCompte (@RequestBody(required = false) RegistrationUser  registrationUser) throws Exception {
+
+        Compte c = (Compte) compteRepository.findCompteByNumeroCompte(registrationUser.getNumeroCompte())
+                .orElseThrow(()->new Exception ("Ce numero de Compte n'existe pas")
+
+        );
+
+
+        return c;
+
+    }
+
+    @PostMapping(value = "/envoie",consumes =(MediaType.APPLICATION_JSON_VALUE))
+    public ResponseEntity<String> envoie (@RequestBody(required = false) Envoie  envoie){
+
 
         return new ResponseEntity<>("Compte Utilsateur Ajouté Avec Succés", HttpStatus.OK);
 
     }
-
 }

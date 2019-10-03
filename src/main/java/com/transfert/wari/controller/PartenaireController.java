@@ -7,7 +7,9 @@ import com.transfert.wari.repository.PartenaireRepository;
 import com.transfert.wari.repository.UserRepository;
 import com.transfert.wari.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -35,11 +37,10 @@ public class PartenaireController {
 
 
 //    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-//    @GetMapping(value = "/liste")
-//    public List<Partenaire> liste() {
-//
-//        return partenaireRepository.findAll();
-//    }
+    @GetMapping(value = "/listePartenaire")
+    public  List<Partenaire> liste() {
+        return partenaireRepository.findAll();
+    }
 
 
     @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
@@ -118,5 +119,25 @@ public class PartenaireController {
        return partenaireRepository.save(p);
     }
 
+
+
+    @PutMapping(value = "/statut/{id}",consumes =(MediaType.APPLICATION_JSON_VALUE))
+    public ResponseEntity<String> blockPartener (@PathVariable("id")int id) throws Exception {
+        Partenaire etat= partenaireRepository.findById((int) id).orElseThrow(
+                ()->new Exception ("Ce Partenaire n'existe pas")
+        );
+
+
+        if (etat.getStatut().equals("debloquer")){
+            etat.setStatut("bloquer");
+            partenaireRepository.save(etat);
+            return new ResponseEntity<>(etat.getEntreprise()+ " a été bloqué", HttpStatus.OK);
+        }
+        else{
+            etat.setStatut("debloquer");
+            partenaireRepository.save(etat);
+            return new ResponseEntity<>(etat.getEntreprise()+ " a été débloqué", HttpStatus.OK);
+        }
+    }
 
 }

@@ -59,26 +59,37 @@ public class UserController {
     }
 
 
-    @PostMapping(value = "/statut/{id}",consumes =(MediaType.APPLICATION_JSON_VALUE))
-    public ResponseEntity<String> findCompte (@RequestBody(required = false) User u){
-        User etat= userRepository.findById(u.getId()).orElseThrow();
-        if (u.getStatut()=="debloquer"){
-            u.setStatut("bloquer");
-            userRepository.save(u);
-            return new ResponseEntity<>(u.getUsername()+ " a été bloqué", HttpStatus.OK);
+    @PutMapping(value = "/statut/{id}",consumes =(MediaType.APPLICATION_JSON_VALUE))
+    public ResponseEntity<String> blockUser (@PathVariable("id")long id) throws Exception {
+        User etat= userRepository.findById(id).orElseThrow(
+                ()->new Exception ("Ce user n'existe pas")
+        );
 
+        if(etat.getUsername().equals("kabirou")){
+            return new ResponseEntity<>(etat.getUsername()+ " Ne peut pas être bloqué car c'est le super admin", HttpStatus.OK);
+        }
+        if (etat.getStatut().equals("debloquer")){
+            etat.setStatut("bloquer");
+            userRepository.save(etat);
+            return new ResponseEntity<>(etat.getUsername()+ " a été bloqué", HttpStatus.OK);
         }
         else{
-            u.setStatut("debloquer");
-            userRepository.save(u);
-            return new ResponseEntity<>(u.getUsername()+ " a été débloqué", HttpStatus.OK);
+            etat.setStatut("debloquer");
+            userRepository.save(etat);
+            return new ResponseEntity<>(etat.getUsername()+ " a été débloqué", HttpStatus.OK);
         }
-
-
-
-
     }
 
+    @PostMapping(value = "/findUsername",consumes =(MediaType.APPLICATION_JSON_VALUE))
+    public User findUsername (@RequestBody(required = false) RegistrationUser  registrationUser) throws Exception {
+
+        User u = (User) userRepository.findUserByUsername(registrationUser.getUsername())
+                .orElseThrow(()->new Exception ("Ce username n'existe pas")
+
+                );
+        return u;
+
+    }
 
 
 }

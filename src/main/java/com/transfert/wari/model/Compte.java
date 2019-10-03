@@ -1,5 +1,6 @@
 package com.transfert.wari.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,7 +25,7 @@ public class Compte {
     private String numeroCompte;
 
     private Integer solde;
-
+    @JsonIgnore
     @JoinColumn(name = "partenaire_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     @JsonIgnoreProperties("comptes")

@@ -18,15 +18,15 @@ public class RegistrationUser {
     private Date dateDepot;
     private User user;
     private Compte compteDepot;
+    private String numeroCompte;
 
+    public String getNumeroCompte() {
+        return numeroCompte;
+    }
 
-
-
-
-
-
-
-
+    public void setNumeroCompte(String numeroCompte) {
+        this.numeroCompte = numeroCompte;
+    }
 
     public String getName() {
         return name;

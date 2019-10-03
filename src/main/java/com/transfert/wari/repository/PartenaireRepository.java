@@ -9,7 +9,7 @@ import java.util.Optional;
 
 
 @Repository
-public interface PartenaireRepository extends JpaRepository<Partenaire, Long> {
+public interface PartenaireRepository extends JpaRepository<Partenaire, Integer> {
     Optional<Partenaire> findByEntreprise(String entreprise);
     Boolean existsByEntreprise(String entreprise);
 }

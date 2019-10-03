@@ -1,5 +1,6 @@
 package com.transfert.wari.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,7 +26,7 @@ public class Depot {
 
     @DateTimeFormat(pattern ="yyyy-MM-dd-mm-ss")
     private Date dateDepot;
-
+    @JsonIgnore
     @JoinColumn(name = "caissier_id" ,referencedColumnName = "id")
     @ManyToOne(optional = false)
     @JsonIgnoreProperties("depot")
@@ -54,8 +55,6 @@ public class Depot {
     public void setCompte(Compte compte) {
         this.compte = compte;
     }
-
-
 
     public Date getDateDepot() {
         return dateDepot;

@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface CompteRepository extends JpaRepository<Compte, Integer> {
+    Optional<Object> findCompteByNumeroCompte(String numeroCompte);
 //    Optional<Compte> findByNumeroCompte(String numeroCompte);
 //    Boolean existsByNumeroCompte(String numeroCompte);
 }
