@@ -51,15 +51,16 @@ public class TransactionController {
         compteRepository.save(cpt);
         depotRepository.save(d);
 
-
         return new ResponseEntity<>("depot reussit", HttpStatus.OK);
-
     }
 
 
     @PostMapping(value = "/compteUser",consumes =(MediaType.APPLICATION_JSON_VALUE))
-    public ResponseEntity<String> addCompteUser (@RequestBody(required = false) RegistrationUser  registrationUser){
-
+    public ResponseEntity<String> addCompteUser (@RequestBody(required = false) AccountUser  accountUser){
+        User user= userRepository.findByUsername(accountUser.getUsername()).orElseThrow();
+        user.setUsername(accountUser.getUsername());
+        user.setCompte(accountUser.getCompte());
+        userRepository.save(user);
 
         return new ResponseEntity<>("Compte Utilsateur Ajouté Avec Succés", HttpStatus.OK);
 

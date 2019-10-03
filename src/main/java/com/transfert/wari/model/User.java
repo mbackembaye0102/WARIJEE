@@ -78,6 +78,19 @@ public class User{
         this.password = password;
     }
 
+//    public void updateUser(Long id, User user){
+//        for(int i=0; i<user.size();i++){
+//            User u=user.get(i);
+//            if(u.getId().equals(id)){
+//                user.set(i, user);
+//                return;
+//            }
+//
+//        }
+//    }
+
+
+
     public Long getId() {
         return id;
     }

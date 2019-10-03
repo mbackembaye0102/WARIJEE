@@ -110,7 +110,7 @@ public class PartenaireController {
         u.setStatut("debloquer");
         Set<Role> roles =new HashSet<>();
         Role role =new Role();
-        role.setId(registrationPartenaire.getProfil());
+        role.setId((long)4);
         roles.add(role);
         u.setRoles(roles);
         u.setPartenaire(p);
