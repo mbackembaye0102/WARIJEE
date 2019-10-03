@@ -1,7 +1,9 @@
 package com.transfert.wari.model;
 
-public class RegistrationUser {
+import java.util.Date;
 
+public class RegistrationUser {
+//POUR USER
     private String name;
     private String username;
     private String password;
@@ -10,6 +12,17 @@ public class RegistrationUser {
     private Long profil;
     private Partenaire partenaire;
     private Compte compte;
+
+  //POUR DEPOT
+    private Integer montant;
+    private Date dateDepot;
+    private User user;
+    private Compte compteDepot;
+
+
+
+
+
 
 
 
@@ -77,5 +90,38 @@ public class RegistrationUser {
 
     public void setCompte(Compte compte) {
         this.compte = compte;
+    }
+
+
+    public Integer getMontant() {
+        return montant;
+    }
+
+    public void setMontant(Integer montant) {
+        this.montant = montant;
+    }
+
+    public Date getDateDepot() {
+        return dateDepot;
+    }
+
+    public void setDateDepot(Date dateDepot) {
+        this.dateDepot = dateDepot;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Compte getCompteDepot() {
+        return compteDepot;
+    }
+
+    public void setCompteDepot(Compte compteDepot) {
+        this.compteDepot = compteDepot;
     }
 }

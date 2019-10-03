@@ -20,9 +20,8 @@ public class Depot {
     @JsonIgnoreProperties("depot")
     private Compte compte;
 
-    @NotBlank
-    @Size(min=3, max = 50)
-    private Double montant;
+
+    private Integer montant;
 
     @DateTimeFormat(pattern ="yyyy-MM-dd-mm-ss")
     private Date dateDepot;
@@ -32,6 +31,14 @@ public class Depot {
     @JsonIgnoreProperties("depot")
     private User user;
 
+    public Integer getMontant() {
+        return montant;
+    }
+
+    public void setMontant(Integer montant) {
+        this.montant = montant;
+    }
+
     public Long getId() {
         return id;
     }
@@ -40,21 +47,15 @@ public class Depot {
         this.id = id;
     }
 
-    public Compte getCompte() {
-        return compte;
+    public Compte getCompte(Compte compte) {
+        return this.compte;
     }
 
     public void setCompte(Compte compte) {
         this.compte = compte;
     }
 
-    public Double getMontant() {
-        return montant;
-    }
 
-    public void setMontant(Double montant) {
-        this.montant = montant;
-    }
 
     public Date getDateDepot() {
         return dateDepot;
