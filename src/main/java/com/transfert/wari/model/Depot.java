@@ -26,6 +26,7 @@ public class Depot {
 
     @DateTimeFormat(pattern ="yyyy-MM-dd-mm-ss")
     private Date dateDepot;
+
     @JsonIgnore
     @JoinColumn(name = "caissier_id" ,referencedColumnName = "id")
     @ManyToOne(optional = false)

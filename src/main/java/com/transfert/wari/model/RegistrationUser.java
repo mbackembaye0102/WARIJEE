@@ -13,12 +13,18 @@ public class RegistrationUser {
     private Partenaire partenaire;
     private Compte compte;
 
-  //POUR DEPOT
+    //POUR DEPOT
     private Integer montant;
     private Date dateDepot;
     private User user;
     private Compte compteDepot;
     private String numeroCompte;
+
+    //POUR TARIF
+    private  Integer borneInferieure;
+    private  Integer borneSuperieure;
+    private  Integer valeur;
+
 
     public String getNumeroCompte() {
         return numeroCompte;
@@ -123,5 +129,29 @@ public class RegistrationUser {
 
     public void setCompteDepot(Compte compteDepot) {
         this.compteDepot = compteDepot;
+    }
+
+    public Integer getBorneInferieure() {
+        return borneInferieure;
+    }
+
+    public void setBorneInferieure(Integer borneInferieure) {
+        this.borneInferieure = borneInferieure;
+    }
+
+    public Integer getBorneSuperieure() {
+        return borneSuperieure;
+    }
+
+    public void setBorneSuperieure(Integer borneSuperieure) {
+        this.borneSuperieure = borneSuperieure;
+    }
+
+    public Integer getValeur() {
+        return valeur;
+    }
+
+    public void setValeur(Integer valeur) {
+        this.valeur = valeur;
     }
 }

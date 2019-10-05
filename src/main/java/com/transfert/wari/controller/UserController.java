@@ -50,7 +50,6 @@ public class UserController {
         roles.add(role);
         u.setRoles(roles);
 
-
         User user=userDetailsService.getUserConnecte();
         user.getPartenaire();
         u.setPartenaire(user.getPartenaire());

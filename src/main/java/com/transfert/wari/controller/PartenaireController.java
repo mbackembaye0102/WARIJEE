@@ -89,14 +89,15 @@ public class PartenaireController {
         //c.setNumeroCompte(nb);
 
 
-        //2e Methode
+        //2e Methode Génération du numero de compte
         SimpleDateFormat formater = null;
         formater = new SimpleDateFormat("ssyyyyMMddHHmm");
         Date now=new Date();
         String numcompt = formater.format(now);
-
         c.setNumeroCompte(numcompt);
+        //l'id du partenaire
         c.setPartenaire(p);
+        //le solde initial
         c.setSolde(75000);
         compteRepository.save(c);
 
@@ -107,12 +108,15 @@ public class PartenaireController {
         u.setPassword(encoder.encode(registrationPartenaire.getPassword()));
         u.setTelephone(registrationPartenaire.getTelephone());
         u.setStatut("debloquer");
+        //Attribuer un role
         Set<Role> roles =new HashSet<>();
         Role role =new Role();
         role.setId((long)4);
         roles.add(role);
         u.setRoles(roles);
+        //id partenaire
         u.setPartenaire(p);
+        //id compte
         u.setCompte(c);
         userRepository.save(u);
 

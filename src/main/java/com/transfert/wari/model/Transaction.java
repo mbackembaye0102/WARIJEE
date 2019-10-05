@@ -1,5 +1,7 @@
 package com.transfert.wari.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,98 +11,74 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
+@Data
+@EqualsAndHashCode(exclude = "users,comptes")
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
     @Size(min=3, max = 50)
     private String code;
 
-    @NotBlank
     @Size(min=3, max = 50)
     private String prenom;
 
-    @NotBlank
     @Size(min=3, max = 50)
     private String nom;
 
 
-    @NotBlank
-    @Size(min=7, max = 15)
     private int telephone;
 
-    @NotBlank
+
     @Size(min=3, max = 50)
     @Autowired(required = false)
     private String typePiece;
 
 
-    @NotBlank
-    @Size(min=7, max = 20)
+
     @Autowired(required = false)
     private int numeroPiece;
 
-    @NotBlank
     @Size(min=3, max = 50)
     private String prenomb;
 
-    @NotBlank
     @Size(min=3, max = 50)
     private String nomb;
 
 
-    @NotBlank
-    @Size(min=7, max = 15)
+
     private int telephoneb;
 
-    @NotBlank
     @Size(min=3, max = 50)
     @Autowired(required = false)
     private String typePieceb;
 
 
-    @NotBlank
-    @Size(min=7, max = 20)
     @Autowired(required = false)
     private int numeroPieceb;
 
 
-    @NotBlank
-    @Size(min=4, max = 30)
     private int montant;
 
-    @NotBlank
-    @Size(min=4, max = 30)
     private int frais;
 
-    @NotBlank
-    @Size(min=4, max = 30)
     private int total;
 
-    @NotBlank
-    @Size(min=4, max = 30)
     private int commissionWari;
 
-    @NotBlank
-    @Size(min=4, max = 30)
     private int commissionEnvoie;
 
-    @NotBlank
-    @Size(min=4, max = 30)
+
     private int commissionRetrait;
 
-    @NotBlank
-    @Size(min=4, max = 30)
     private int commissionEtat;
 
-    @NotBlank
     @Autowired(required = false)
     @DateTimeFormat(pattern ="yyyy-MM-dd-mm-ss")
     private Date dateEnvoie;
 
-    @NotBlank
+
     @Autowired(required = false)
     @DateTimeFormat(pattern ="yyyy-MM-dd-mm-ss")
     private Date dateRetrait;
@@ -116,7 +94,6 @@ public class Transaction {
     @Autowired(required = false)
     private User guichetierRetrait ;
 
-    @NotBlank
     @Size(min=3, max = 50)
     private String etat;
 
@@ -277,7 +254,7 @@ public class Transaction {
         this.commissionEtat = commissionEtat;
     }
 
-    public Date getDateEnvoie() {
+    public Date getDateEnvoie(Date date) {
         return dateEnvoie;
     }
 
