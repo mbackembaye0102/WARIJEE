@@ -1,6 +1,7 @@
 package com.transfert.wari.config;
 
 
+
 import com.transfert.wari.services.UserDetailsServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayDeque;
 
+//permet d intercepter les requetes
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired

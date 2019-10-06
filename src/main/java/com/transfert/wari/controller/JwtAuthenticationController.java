@@ -40,7 +40,7 @@ public class JwtAuthenticationController {
         final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResponse(token));
     }
-@Autowired
+    @Autowired
     UserRepository userRepository;
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE })
     public @ResponseBody String createLoginToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
@@ -48,11 +48,9 @@ public class JwtAuthenticationController {
         if(user.getStatut().equals("bloquer")){
             return  "vous etes bloqués";
         }
-
         if(user.getPartenaire().getStatut().equals("bloquer")){
             return  "votre partenaire est bloqué";
         }
-
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
